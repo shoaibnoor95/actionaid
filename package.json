@@ -58,7 +58,7 @@
     "react": "16.2.0",
     "react-activity": "^1.2.2",
     "react-bootstrap": "^0.32.4",
-    "react-dom": "16.2.0",
+    "react-dom": "16.2.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
