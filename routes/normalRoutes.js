@@ -587,7 +587,7 @@ router.post('/invisibleCourse',ensureAuth2,function(req,res,next){
  })
  
 router.post('/enrollCourses',ensureAuth,(req,res,next)=>{
- let enrollmentUser=[];
+ console.log(req.body)
   var enrollCourse=new enrollment({
    _userId:req.user._id,
    status:0,
@@ -695,9 +695,9 @@ router.get('/getUser',ensureAuth,(req,res,next)=>{
 
  
 
-  router.get('/passwordReset',(req,res,next)=>{    
-      res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
-  });
+  // router.get('/passwordReset',(req,res,next)=>{    
+  //     res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
+  // });
 
  
 
@@ -714,10 +714,10 @@ router.get('/getUser',ensureAuth,(req,res,next)=>{
      }
      var token = new Token({
        _userId: user._id,
-       token:email+crypto.randomBytes(16).toString('hex')
+       token:req.body.email+crypto.randomBytes(16).toString('hex')
      });
      token.save(next);
-   ejs.renderFile(__dirname + '/templates/template2.ejs',{token:token.token}, (err, data) => {
+   ejs.renderFile(__dirname + '/template2.ejs',{token:token.token}, (err, data) => {
        
        if (err) {
         return res.send({message:err.message})  
@@ -733,9 +733,9 @@ router.get('/getUser',ensureAuth,(req,res,next)=>{
          
          var client = nodemailer.createTransport(sgTransport(options));
          var email = {
-           from: '<no-reply@tutorns.com>',
-           to: 'shoaibnoor95@hotmail.com',
-           subject: 'Tutons account confirmation',
+           from: '<no-reply@actionaid.com>',
+           to: req.body.email,
+           subject: 'Action aid password reset',
            html: data
          };
          
@@ -812,14 +812,16 @@ router.get('/email_confirmation', function (req, res, next) {
     });
 });
 router.get('/passwordResetToken',(req,res,next)=>{
-    
+    console.log(req.query.id)
   Token.findOne({ "token": req.query.id }, function (err, token) {
     if(err){
+      console.log(err)
        res.send({danger:true})
        return;
     }
     if (!token) 
     {
+      console.log('token not found')
       res.send({danger:true})
       return; 
     }
@@ -827,34 +829,69 @@ router.get('/passwordResetToken',(req,res,next)=>{
     User.findOne({ _id: token._userId }).select({"emailAuth":1}).exec((err, user)=> {
       if (!user) 
       { 
+        console.log('User not found')
         res.send({danger:true})
         return;
     }
-          if (user.emailAuth)
-          { 
-            res.send({success:true});
-            return;
-          }
+          
                   
       user.emailAuth = true;
       user.save(function (err) {
         if (err) { 
               res.send({ danger: true}); 
               return;
-      }
+      }   
               res.send({success:true})
         });
       });
     });
   })
-router.get('/password_Reset/274sakldajdaskjaskld23280923089213893kdasjklasjddljkdslskdsladkjasklasdjdssjdkls2398023sknasddasjasdgdas/*',(req,res,next)=>{
+
+  
+router.get('/passwordReset/*',function(req,res,next){
 
   res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
-
+  return;
 });
 
 
-
+router.post('/forgetPassword',(req,res,next)=>{
+  var password=req.body.password;
+  var code=req.body.code;
+  
+  Token.findOne({token:code}).select({"_userId":1}).exec(function(err,token){
+    if(err){
+      res.send({error:'Could not proceed the request'})
+      return;
+    }
+    if(!token){
+      res.send({error:'Your 15 minutes are over token expired'})
+      return;
+    }
+    if(token){
+      User.findOne({_id:token._userId}).select({"email":1}).exec(function(err,user){
+        if(err){
+            res.send({error:'Could not proceed the request'})
+            return;
+          }
+        if(!user){
+            res.send({error:'You have entered the wrong phone number or your 15 mints are over'})
+          return;
+          }
+        if(user){
+            user.password=password
+            user.save(function(err){
+              if(err){
+                res.send({error:'Could not proceed the request'})
+                return;
+              }
+                res.send({passwordChange:true})
+            })
+        }
+      })
+    }
+  })
+})
   
   router.get('/getSingle',ensureAuth2,(req,res,next)=>{
     User.findOne({_id:req.query.id},function(err,user){

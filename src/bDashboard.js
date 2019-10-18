@@ -22,7 +22,6 @@ export default class Dashboard extends React.Component{
             nationality:'',
             message:'',
             message2:'',
-            mobileToggle:false,
             myClass:"bp-legacy lp_course-template-default single single-lp_course postid-5299 wp-embed-responsive theme-eduma eduma-child learnpress learnpress-page woocommerce-no-js pmpro-body-has-access group-blog thim-body-preload bg-boxed-image thim-popup-feature no-js",
             headerModal:false,
             course:[],
@@ -161,16 +160,18 @@ export default class Dashboard extends React.Component{
         })
         .then(data=>{
           if(data.data.enroll){
-            if(data.data.course='Child Protection Policy')
+            console.log(data.data)
+            if(data.data.course=='Child Protection Policy'){
             History.push('/childProtect')
             window.location.reload()
-          }
-          if(data.data.course='Prevention of Sexual Abuse, Exploitation and Harm')
+            }
+          
+          else if(data.data.course=='Prevention of Sexual Abuse, Exploitation and Harm')
        {   History.push('/pseah')
           window.location.reload()
       
         }  
-      
+          }
         })
       }
  
@@ -325,7 +326,6 @@ export default class Dashboard extends React.Component{
             <div className="tab-content">
 {this.state.toggleOne?              
 <div role="tabpanel" className="tab-pane active"  id="thim-widget-tab-11567690270-1-69">
-    You are not enroll in any training !<br/>
     <h3>Avalialable Trainings</h3>
      <div style={{width:'90%', border:'1px solid #efefef'}}  className="row">
       <table border="0">

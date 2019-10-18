@@ -6,7 +6,7 @@ import './wp-content/cache/autoptimize/1/css/autoptimize_28334e455278b10593abdc1
 import './wp-includes/css/dashicons.min.css';
 import './styles.css';
 import './wp-content/cache/autoptimize/1/css/autoptimize_single_8badfcbd466da054e5b200be42433b87.css';
-
+import {ModalBody,ModalHeader,ModalFooter,ModalDialog,Button as ModalButton} from 'react-bootstrap';
 export default class Check2 extends React.Component{
     constructor(props){
         super(props);
@@ -27,7 +27,8 @@ export default class Check2 extends React.Component{
             points:['1-2','1-2','1-2','1-2','1-2','1-2','1-2'],
             _enrollmentId:'',
             completed:false,
-            courseId:''
+            courseId:'',
+            headerModal:false
                 
         }
     }
@@ -153,6 +154,13 @@ export default class Check2 extends React.Component{
                :
                          <div>
 
+{this.state.headerModal?          
+                    <ModalDialog open={true} >
+                      <ModalHeader closeButton onClick={()=>{this.setState({headerModal:false})}} ></ModalHeader>
+                      <ModalButton className="btn btn-lg btnClass" style={{width:'100%'}} onClick={()=>{History.push('/dashboard');window.location.reload(); }}>Dashboard </ModalButton>
+                      <br/>
+                      <ModalButton className="btn btn-lg btnClass" style={{width:'100%'}} onClick={()=>{History.push('/'); window.location.reload();}}>Home </ModalButton>
+                    </ModalDialog>:<span/>}
               {console.log(this.state.courseId+'sss')}
               
               <div id="wrapper-container" className="wrapper-container">
@@ -176,7 +184,7 @@ export default class Check2 extends React.Component{
 <a target="_self" href="#"><img src={require("./wp-content/uploads/2016/02/megamenu.jpg")} width="252" height="359" alt="" /></a></div></div></div></div></div></div></div></div>
 </li>
 <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-99 tc-menu-item tc-menu-depth-0 tc-menu-align-left tc-menu-layout-default"><a href="/dashboard" className="tc-menu-inner">DASHBOARD</a></li><li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-1702 tc-menu-item tc-menu-depth-0 tc-menu-align-left tc-menu-layout-default"><a href="/" className="tc-menu-inner">Home</a></li><li className="menu-right"><ul><li id="courses-searching-3" className="widget widget_courses-searching"><div className="thim-widget-courses-searching thim-widget-courses-searching-base template-overlay-v2"><div className="thim-course-search-overlay"><div className="courses-searching layout-overlay"><div className="search-popup-bg"></div><ul className="courses-list-search list-unstyled"></ul></div></div></div></li></ul></li></ul></nav><div className="menu-mobile-effect navbar-toggle" onClick={()=>{
-this.setState({myClass:"bp-legacy page-template-default page page-id-2780 wp-embed-responsive theme-eduma woocommerce-js pmpro-body-has-access siteorigin-panels  group-blog bg-boxed-image thim-popup-feature js course-scroll-remove mobile-menu-open"})}} data-effect="mobile-effect">
+this.setState({headerModal:true})}} data-effect="mobile-effect">
 
 
  <span className="icon-bar"></span> <span className="icon-bar"></span>

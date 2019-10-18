@@ -12,7 +12,7 @@ var userSchema = mongoose.Schema({
   createdAt: {type: Date, default: Date.now },
   lastName:  {type: String, required: true },
   email:     {type: String,unique:true},
-  emailAuth:{type:Boolean,default:true},
+  emailAuth:{type:Boolean,default:false},
   approved:{type:Boolean,default:true},
   enrollments:[String]
 

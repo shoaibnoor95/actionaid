@@ -436,7 +436,7 @@ jQuery(document).ready(function ($) {
                 window.location.reload();
             }
                 else{ 
-                    History.push('/dashboards')
+                    History.push('/dashboard')
                     window.location.reload();
                     }               
             }

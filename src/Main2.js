@@ -7,6 +7,7 @@ import './styles.css';
 import './wp-content/cache/autoptimize/1/css/autoptimize_single_8badfcbd466da054e5b200be42433b87.css';
 import History from './History'
 import axios from 'axios';
+import Axios from 'axios';
 // import Slider from './slider'
 export default class Main2 extends React.Component{
     
@@ -35,7 +36,32 @@ export default class Main2 extends React.Component{
         }
 
     }
-    
+    onRecover(e){
+        e.preventDefault();
+        Axios({
+            withCredentials:true,
+            method:'post',
+            data:{
+                email:this.state.mail
+            },
+            url:'/resetPassword'
+        })
+        .then(data=>{
+            if(data.data.mail){
+                this.setState({
+                    message:'Check your email account',
+                    lostPassword:false
+                })
+            }
+            if(data.data.message){
+                this.setState({
+                    message:data.data.message,
+                    
+                })
+                
+            }
+        })
+    }
 
     componentDidMount(){
        axios({
@@ -629,7 +655,7 @@ jQuery(document).ready(function ($) {
                  <p  className="login-username"> 
                  <input type="text" name="log"    value={this.state.mail} placeholder="Email" className="input required" onChange={(e)=>{this.setState({mail:e.target.value})}}  size="20" /></p>
                   <p className="submit login-submit"> 
-                 <input type="submit" name="wp-submit" onClick={this.onSignIn.bind(this)} className="button button-primary button-large" value="Recover" /> 
+                 <input type="submit" name="wp-submit" onClick={this.onRecover.bind(this)} className="button button-primary button-large" value="Recover" /> 
                 </p></form>
          
          <p className="link-bottom">Want to <a className="register" href="#" onClick={()=>{this.setState({lostPassword:false,message2:'',message:''})}}>login? </a></p></div>
@@ -790,7 +816,7 @@ jQuery(document).ready(function ($) {
                  <p  className="login-username"> 
                  <input type="text" name="log"    value={this.state.mail} placeholder="Email" className="input required" onChange={(e)=>{this.setState({mail:e.target.value})}}  size="20" /></p>
                   <p className="submit login-submit"> 
-                 <input type="submit" name="wp-submit" onClick={this.onSignIn.bind(this)} className="button button-primary button-large" value="Recover" /> 
+                 <input type="submit" name="wp-submit" onClick={this.onRecover.bind(this)} className="button button-primary button-large" value="Recover" /> 
                 </p></form>
          
          <p className="link-bottom">Want to <a className="register" href="#" onClick={()=>{this.setState({lostPassword:false,message2:'',message:''})}}>login? </a></p></div>
