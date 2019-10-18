@@ -28,7 +28,9 @@ export default class Dashboard extends React.Component{
             course:[],
             myId:'',
             enrollments:[],
-            competed:[]
+            competed:[],
+
+            courseUrl:['childProtect','pseah','ctp']
           }
     }
     componentDidMount(){
@@ -149,6 +151,7 @@ export default class Dashboard extends React.Component{
       }
       }
       enroll(courseId,e){
+        console.log(courseId)
         e.preventDefault();
         Axios({
           withCredentials:true,
@@ -190,7 +193,7 @@ export default class Dashboard extends React.Component{
           {this.state.enrollments.indexOf(el._id)==-1?
           <td><button className="btn btn-primary btn-sm btnClass" onClick={this.enroll.bind(this,el['_id'])}  ><i className="fa fa-book"></i> Enroll</button></td>
         : 
-          <td><button className="btn btn-default btn-sm btnClass" onClick={()=>{History.push('/childProtect');window.location.reload()}}  ><i className="fa fa-book"></i> Continue</button></td>
+          <td><button className="btn btn-default btn-sm btnClass" onClick={()=>{History.push('/'+this.state.courseUrl[i]);window.location.reload()}}  ><i className="fa fa-book"></i> Continue</button></td>
           }
         </tr>
         )

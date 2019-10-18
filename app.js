@@ -40,20 +40,20 @@ const sess = {
         autoReconnect: true
     })
 }
-app.use((req,res,next)=>{
-    console.log(req.cookies);
-    next();
-})
+// app.use((req,res,next)=>{
+//     console.log(req.cookies);
+//     next();
+// })
 let port =process.env.PORT ||3000
 app.use(session(sess));
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(normalRoutes);
-app.use('*',function(req,res,next){
-    res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
-  })
+// app.use('*',function(req,res,next){
+//     res.sendFile(path.resolve(__dirname, './views', 'index.html'));
+//   })
   
 app.listen(port,()=>{
-    console.log('Server is runing on port 3000');
+    console.log('Server is runing on port '+port);
 })

@@ -13,9 +13,6 @@ const ejs=require('ejs')
 const sgTransport=require('nodemailer-sendgrid-transport');
 const nodemailer=require('nodemailer');
 const sessions=require('../models/sessions')
-router.get('/',function(req,res,next){
-  res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
-})
 
 
 
@@ -39,6 +36,10 @@ function ensureAuth2(req,res,next){
     res.redirect('/')
   }
 }
+router.get('/',function(req,res,next){
+  res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
+})
+
 router.get('/adminOverview',ensureAuth2,function(req,res,next){
   User.count({type:{$ne:'admin'}},function(err,userCount){
   if(err){
@@ -226,7 +227,9 @@ router.get('/coursesdetails',function(req,res,next){
       res.send({course})
   })  
 })
-  
+router.get('/email_confirm/*',function(req,res,next){
+  res.sendFile(path.resolve(__dirname, '../views', 'index.html')); 
+})  
  
  router.get('/aUsers',function(req,res,next){
   res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
@@ -246,7 +249,7 @@ router.get('/contact',function(req,res,next){
 
 })
 router.get('/totalCourses',ensureAuth2, function(req,res,next){
-  Courses.find({}).select({courseTitle:1,createdAt:1,availablity:1}).exec(function(err,courses){
+  Courses.find({}).select({courseTitle:1,createdAt:1,availablity:1,}).sort({createdAt:1}).exec(function(err,courses){
     if(err){
       console.log(err)
       res.send({err:true})
@@ -256,7 +259,10 @@ router.get('/totalCourses',ensureAuth2, function(req,res,next){
       res.send({message:'Courses not found'})
       return;
     }
+    // enrollment.count
+    console.log(courses); 
     if(courses){
+
       enrollment.count({_courseId:courses._id}).exec(function(err,enrollCount){
         if(err){
           res.send({error:true})
@@ -323,11 +329,40 @@ router.get('/totalCourses',ensureAuth2, function(req,res,next){
        }
       })
     })
+    router.get('/pseahpolicy',ensureAuth,(req,res,next)=>{
+      Courses.findOne({courseTitle:'Prevention of Sexual Abuse, Exploitation and Harm'}).select({_id:1}).exec(function(err,courses){
+       if(err){
+         console.log(err)
+         res.send({error:true})
+       }
+       if(!courses){
+         res.send({message:'Course not found'})
+         return;
+       } 
+       if(courses){
+         console.log(courses)
+         console.log(req.user._id +'ss')
+        enrollment.find({$and:[{courseId:courses._id},{_userId:req.user._id}]}).exec(function(err,enrollments){
+          if(err){
+            console.log(err)
+            res.send({error:true})
+            return;
+          }
+          if(enrollments){
+            console.log(enrollments)
+            res.send({enrollments})
+          }
+        })
+       }
+      })
+    })
     
     router.get('/childProtect',ensureAuth,(req,res,next)=>{
       res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
     })
-    
+    router.get('/pseah',ensureAuth,(req,res,next)=>{
+      res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
+    })
 router.get('/createmeadmin',function(req,res,next){
   var newUser =new User({
     firstName:'Shoaib',
@@ -360,6 +395,22 @@ router.get('/createmeadmin',function(req,res,next){
         res.send({save:true})
       })
     })
+    router.get('/exploitation',ensureAuth2,function(req,res,next){
+      var newCourse=new Courses({
+        courseTitle:'Prevention of Sexual Abuse, Exploitation and Harm',
+        QNo:7,
+        description:'This training will let you know about Prevention of Sexual Abuse, Exploitation and Harm policies',
+      })
+      newCourse.save(function(err){
+        if(err){
+          console.log(err)
+          res.send(err)
+          return;
+        }
+        console.log('saved')
+        res.send({save:true})
+      })
+    })
     
     router.post('/deactivateUser',ensureAuth2,(req,res,next)=>{
       
@@ -372,12 +423,12 @@ router.get('/createmeadmin',function(req,res,next){
             res.send({deactivate:true})
         })
       })
-router.get("/childProtect",function(req,res,next){
+router.get("/childProtect",ensureAuth,function(req,res,next){
   res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
 })
-router.get("/check2",function(req,res,next){
-  res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
-})  
+// router.get("/check2",function(req,res,next){
+//   res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
+// })  
   router.get('/search',ensureAuth2,(req,res,next)=>{
   User.findOne({email:req.query.email},function(err,user){
     if(err){
@@ -535,15 +586,15 @@ router.post('/invisibleCourse',ensureAuth2,function(req,res,next){
  
 router.post('/enrollCourses',ensureAuth,(req,res,next)=>{
  let enrollmentUser=[];
- enrollmentUser.push(req.user._id)
   var enrollCourse=new enrollment({
-   _userId:enrollmentUser,
+   _userId:req.user._id,
    status:0,
    courseId:req.body.courseId,
  })
  
  enrollCourse.save(function(err){
    if(err){
+     console.log(err)
      res.send({error:true});
      return;
    }
@@ -707,6 +758,49 @@ router.get('/course',ensureAuth,(req,res,next)=>{
  
   })
 })
+router.get('/email_confirmation', function (req, res, next) {
+  console.log(req.query.id)
+      
+  Token.findOne({ "token": req.query.id }, function (err, token) {
+    
+    if(err){
+      console.log(err)
+       res.send({danger:true})
+       return;
+    }
+    if (!token) 
+    { console.log(err)
+      res.send({danger:true})
+      return; 
+    }
+   
+    User.findOne({ _id: token._userId }).select({"emailAuth":1}).exec(function (err, user) {
+      if (!user) 
+      { 
+        console.log('err')
+        res.send({danger:true})
+        return;
+    }
+          if (user.emailAuth)
+          { 
+            res.send({verified:true});
+            return;
+          }
+                  
+      user.emailAuth = true;
+      user.save(function (err) {
+        if (err) { 
+          console.log(err)
+          res.send({danger: true}); 
+          return;
+      }
+          console.log('done')
+          res.send({success:true})
+          return;
+        });
+      });
+    });
+});
 router.get('/passwordResetToken',(req,res,next)=>{
     
   Token.findOne({ "token": req.query.id }, function (err, token) {
@@ -785,7 +879,7 @@ router.get('/password_Reset/274sakldajdaskjaskld23280923089213893kdasjklasjddljk
       })
     })
   })
-  router.get('/*',function(req,res,next){
+  router.get('/*',ensureAuth,function(req,res,next){
     res.sendFile(path.resolve(__dirname, '../views', 'index.html'));
   })
   

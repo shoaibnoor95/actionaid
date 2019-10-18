@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -w",
     "dev": "webpack && serve",
-    "server": "nodemon  app --ignore src ",
+    "server": "nodemon app ",
     "start": "concurrently \"npm run build \"  \" npm run server\""
   },
   "keywords": [],
@@ -62,6 +62,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
+    "react-slideshow-image": "^1.3.0",
     "reactstrap": "^8.0.1",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",

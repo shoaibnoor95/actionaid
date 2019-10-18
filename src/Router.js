@@ -7,8 +7,10 @@ import Edit from './admin/edit';
 import Dashboards from './bDashboard';
 import User from './admin/Users';
 import Contact from './Contact';
-import ChildProtection from './ChildProtection';
+import Pseah from './Pseah';
+// import ChildProtection from './ChildProtection';
 import Check2 from './check2';
+import Emailconfirm from './EmailConfirm';
 const Routes=()=>{
     return(
         <Router>
@@ -18,7 +20,9 @@ const Routes=()=>{
                 <Route exact path="/aDashboard" component={Dashboard}/>
                 <Route exact path="/aUsers" component={User} />
                 <Route exact path="/childProtect" component={Check2}/>
-                <Route exact path="/check111" component={ChildProtection}/>
+                {/* <Route exact path="/check111" component={ChildProtection}/> */}
+                <Route exact path="/email_confirm/:id" component={Emailconfirm}/>
+                <Route exact path="/Pseah" component={Pseah}/>
                 <Route exact path="/contact" component={Contact}/>
                 <Route exact path="/dashboard" component={Dashboards}/>
                {/* <Route exact path="/aEdit" component={Edit}/>  */}

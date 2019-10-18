@@ -31,6 +31,8 @@ export default class Contact extends React.Component{
             message2:'',
             message3:'',
             message4:'',
+            lostPassword:false,
+            
             contact:{
                 name:'',
                 email:'',
@@ -569,24 +571,44 @@ jQuery(document).ready(function ($) {
                        
                            </div> 
                            <br/>
-                           
-                    <div className="thim-popup-inner">
-                    <div className="thim-login"><h4 className="title">Login with your site account  </h4> 
-                       <form name="loginpopopform">
-                       <p className="login-username"> 
-                       <input type="text" name="log" value={this.state.username}  placeholder="Username or email" onChange={(e)=>{this.setState({username:e.target.value})}} className="input required"  size="20" /></p>
-                       <p className="login-password"> 
-                       <input type="password" name="pwd" onChange={(e)=>{this.setState({password:e.target.value})}} placeholder="Password" value={this.state.password} className="input required"  size="20" /></p>
-                        <a className="lost-pass-link" href="#" title="Lost Password">Lost your password?</a><p className="forgetmenot login-remember"> <label for="popupRememberme">
-                       <input name="rememberme" type="checkbox" value="forever" id="popupRememberme" /> Remember Me </label></p><p className="submit login-submit"> 
-                       <input type="submit" onClick={this.onSignIn.bind(this)}  name="wp-submit" className="button button-primary button-large" value="Login" /> 
-                       </p></form>
-               
-               <p className="link-bottom">Not a member yet? <a className="register" href="#" onClick={()=>{this.setState({showSignIn:false,showRegister:true,message2:'',message:''})}}>Register now</a></p></div>
-               
-               
+                           {!this.state.lostPassword? 
+                       <div className="thim-popup-inner">
+                        <div className="thim-login"><h4 className="title">Login with your site account  </h4> 
+                        <form name="loginpopopform" >
+                        <p  className="login-username"> 
+                        <input type="text" name="log"    value={this.state.username} placeholder="Username or email" className="input required" onChange={(e)=>{this.setState({username:e.target.value})}} value={this.state.username} size="20" /></p>
+                        <p className="login-password"> 
+                        <input type="password" name="pwd"value={this.state.password} placeholder="Password" className="input required" onChange={(e)=>{this.setState({password:e.target.value})}}          value={this.state.password} size="20" /></p>
+                        <a className="lost-pass-link" onClick={()=>{this.setState({lostPassword:true})}} href="#" title="Lost Password">Lost your password?</a><p className="forgetmenot login-remember"> <label for="popupRememberme">
+                        <input name="rememberme" type="checkbox" value="forever" id="popupRememberme" /> Remember Me </label></p>
+                        <div style={{color:'green'}}>{this.state.message}</div>
+                        <div style={{color:'red'}}>{this.state.message2}</div>
+                        <p className="submit login-submit"> 
+                        <input type="submit" name="wp-submit" onClick={this.onSignIn.bind(this)} className="button button-primary button-large" value="Sign in" /> 
+        </p></form>
+                
+                <p className="link-bottom">Not a member yet? <a className="register" href="#" onClick={()=>{this.setState({showRegister:true,showSignIn:false,message2:'',message:''})}}>Register now</a></p></div>
+                
+                
+          
+                </div>:
+                 <div className="thim-popup-inner">
+                 <div className="thim-login"><h4 className="title">Recover your password  </h4> 
+                 <form name="loginpopopform" >
+                 <p  className="login-username"> 
+                 <input type="text" name="log"    value={this.state.mail} placeholder="Email" className="input required" onChange={(e)=>{this.setState({mail:e.target.value})}}  size="20" /></p>
+                  <p className="submit login-submit"> 
+                 <input type="submit" name="wp-submit" onClick={this.onSignIn.bind(this)} className="button button-primary button-large" value="Recover" /> 
+                </p></form>
          
-               </div> <span className="close-popup"><i className="fa fa-times" aria-hidden="true"></i></span><div className="cssload-container">
+         <p className="link-bottom">Want to <a className="register" href="#" onClick={()=>{this.setState({lostPassword:false,message2:'',message:''})}}>login? </a></p></div>
+         
+         
+   
+         </div>
+            
+            }    
+                    <span className="close-popup"><i className="fa fa-times" aria-hidden="true"></i></span><div className="cssload-container">
                    <div className="cssload-loading"><i></i><i></i><i></i><i></i></div></div></div></div></div>
           
           
@@ -680,24 +702,43 @@ jQuery(document).ready(function ($) {
                             </div> 
                             <br/>
                             
-                        <div className="thim-popup-inner">
+                            {!this.state.lostPassword? 
+                       <div className="thim-popup-inner">
                         <div className="thim-login"><h4 className="title">Login with your site account  </h4> 
                         <form name="loginpopopform" >
                         <p  className="login-username"> 
                         <input type="text" name="log"    value={this.state.username} placeholder="Username or email" className="input required" onChange={(e)=>{this.setState({username:e.target.value})}} value={this.state.username} size="20" /></p>
                         <p className="login-password"> 
                         <input type="password" name="pwd"value={this.state.password} placeholder="Password" className="input required" onChange={(e)=>{this.setState({password:e.target.value})}}          value={this.state.password} size="20" /></p>
-                        <a className="lost-pass-link" href="#" title="Lost Password">Lost your password?</a><p className="forgetmenot login-remember"> <label for="popupRememberme">
+                        <a className="lost-pass-link" onClick={()=>{this.setState({lostPassword:true})}} href="#" title="Lost Password">Lost your password?</a><p className="forgetmenot login-remember"> <label for="popupRememberme">
                         <input name="rememberme" type="checkbox" value="forever" id="popupRememberme" /> Remember Me </label></p>
+                        <div style={{color:'green'}}>{this.state.message}</div>
+                        <div style={{color:'red'}}>{this.state.message2}</div>
                         <p className="submit login-submit"> 
-                        <input type="submit" name="wp-submit" onClick={this.onSignIn.bind(this)} className="button button-primary button-large" value="Login" /> 
+                        <input type="submit" name="wp-submit" onClick={this.onSignIn.bind(this)} className="button button-primary button-large" value="Sign in" /> 
         </p></form>
                 
                 <p className="link-bottom">Not a member yet? <a className="register" href="#" onClick={()=>{this.setState({showRegister:true,showSignIn:false,message2:'',message:''})}}>Register now</a></p></div>
                 
                 
           
-                </div> <span className="close-popup"><i className="fa fa-times" aria-hidden="true"></i></span><div className="cssload-container">
+                </div>:
+                 <div className="thim-popup-inner">
+                 <div className="thim-login"><h4 className="title">Recover your password  </h4> 
+                 <form name="loginpopopform" >
+                 <p  className="login-username"> 
+                 <input type="text" name="log"    value={this.state.mail} placeholder="Email" className="input required" onChange={(e)=>{this.setState({mail:e.target.value})}}  size="20" /></p>
+                  <p className="submit login-submit"> 
+                 <input type="submit" name="wp-submit" onClick={this.onSignIn.bind(this)} className="button button-primary button-large" value="Recover" /> 
+                </p></form>
+         
+         <p className="link-bottom">Want to <a className="register" href="#" onClick={()=>{this.setState({lostPassword:false,message2:'',message:''})}}>login? </a></p></div>
+         
+         
+   
+         </div>
+            
+            }<span className="close-popup"><i className="fa fa-times" aria-hidden="true"></i></span><div className="cssload-container">
                     <div className="cssload-loading"><i></i><i></i><i></i><i></i></div></div></div></div></div>
            
            

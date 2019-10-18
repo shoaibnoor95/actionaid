@@ -17,9 +17,10 @@ export default class Courses extends React.Component{
 			url:'/totalCourses'
 		})
 		.then(data=>{
-			console.log(data.data.courses[0].createdAt)
+			// console.log(data.data.courses)
 		let courseName=this.state.courseName;
-		courseName.push(data.data.courses)	
+		courseName.push(data.data.courses)
+		console.log(data.data)	
 			this.setState({
 				courseName,
 				count:data.data.enrollCount,
@@ -143,6 +144,8 @@ export default class Courses extends React.Component{
 				    	<th>Status</th>
 						<th></th>
 				    	</tr></thead>
+						{!this.state.loading?    	
+			
 				    <tbody>
 						{/* <tr>
 				    	<td>Child protection policies</td>
@@ -150,7 +153,7 @@ export default class Courses extends React.Component{
 				    	<td>January, 10th 2017</td>
 				    	<td> <a className="btn btn-primary" href="#">Visible</a></td>
 				    	</tr>*/}
-				{!this.state.loading?    	<tr> 
+				<tr> 
 					{console.log(this.state.courseName[0][0])}
 				    	<td>{this.state.courseName[0][0]['courseTitle']}</td>
 				    	<td>{this.state.count}</td>
@@ -162,14 +165,28 @@ export default class Courses extends React.Component{
 						<td><a className="btn btn-primary" href="#" onClick={this.onUnavailable.bind(this,this.state.courseName[0][0]._id)} >Blocked</a></td>
 						:<td><a className="btn btn-primary" href="#" onClick={this.onAvailable.bind(this,this.state.courseName[0][0]._id)} >Available</a></td>
 						}
-				    	</tr>:<tr/>}
+				    	</tr>
+				  
+						<tr> 
+					{console.log(this.state.courseName[0][0])}
+				    	<td>{this.state.courseName[0][1]['courseTitle']}</td>
+				    	<td>{this.state.count}</td>
+				    	<td>{new Date(this.state.courseName[0][1].createdAt).toLocaleDateString()}</td>
+						{this.state.courseName[0][1].availablity==true?
+						<td>Available</td>
+						:<td>Blocked</td>}
+						{this.state.courseName[0][1].availablity==true?
+						<td><a className="btn btn-primary" href="#" onClick={this.onUnavailable.bind(this,this.state.courseName[0][1]._id)} >Blocked</a></td>
+						:<td><a className="btn btn-primary" href="#" onClick={this.onAvailable.bind(this,this.state.courseName[0][1]._id)} >Available</a></td>
+						}
+				    	</tr>
 				    	{/* <tr>
 				    	<td>Safe Guarding and preventation of Sexual Exploitation</td>
 				    	<td>0</td>
 				    	<td>August, 3rd 2016</td>
 				    	<td><a className="btn btn-danger" href="#">Unvisible</a> </td>
 				    	</tr> */}
-				    	</tbody>
+				    </tbody>	:<tbody/>}
 				    </table>
 			    
 			  </div>

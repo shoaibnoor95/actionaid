@@ -7,7 +7,7 @@ import './styles.css';
 import './wp-content/cache/autoptimize/1/css/autoptimize_single_8badfcbd466da054e5b200be42433b87.css';
 import History from './History'
 import axios from 'axios';
-
+// import Slider from './slider'
 export default class Main2 extends React.Component{
     
     constructor(props){
@@ -28,6 +28,7 @@ export default class Main2 extends React.Component{
                 password:'',
                 consfirmPassword:'',
             },
+            loading:true,
             message:'',
             message2:'',
             isAuth:false
@@ -49,6 +50,9 @@ export default class Main2 extends React.Component{
                    isAuth:true
                })
             }
+            this.setState({
+                loading:false
+            })
        })
         const jQuery=$;
 
@@ -513,16 +517,34 @@ jQuery(document).ready(function ($) {
         })
     }
     render(){
+        const slideImages = [
+            'images/slide_2.jpg',
+            'images/slide_3.jpg',
+            'images/slide_4.jpg'
+          ];
+           
+          const properties = {
+            duration: 5000,
+            transitionDuration: 500,
+            infinite: true,
+            indicators: true,
+            arrows: true,
+            onChange: (oldIndex, newIndex) => {
+              console.log(`slide transition from ${oldIndex} to ${newIndex}`);
+            }
+          }
         return(
             <div data-rsssl="1" className="bp-legacy lp_course-template-default single single-lp_course postid-5299 wp-embed-responsive theme-eduma eduma-child learnpress learnpress-page woocommerce-no-js pmpro-body-has-access group-blog thim-body-preload bg-boxed-image thim-popup-feature no-js" id="thim-body">
-				<div id="preload">
+                {this.state.loading?
+                
+                <div id="preload">
 					<div className="sk-folding-cube">
 						<div className="sk-cube1 sk-cube"></div>
 						<div className="sk-cube2 sk-cube"></div>
 						<div className="sk-cube4 sk-cube"></div>
 						<div className="sk-cube3 sk-cube"></div>
 					</div></div>
-
+        :<div>
 
                 {this.state.headerModal?          
                     <ModalDialog open={true} >
@@ -661,10 +683,13 @@ jQuery(document).ready(function ($) {
            
                   :<span/>}
                                 
-<a href="#" className="tc-menu-inner">Free Access Type</a></li>
+</li>
 </ul></div></div></div>
 <div id="pgc-tc-megamenu-7682-0-1" className="panel-grid-cell"><div id="panel-tc-megamenu-7682-0-1-0" className="so-panel widget widget_courses panel-first-child panel-last-child" data-index="1"><div className="thim-widget-courses thim-widget-courses-base template-megamenu-v3"><div className="thim-course-megamenu"><div className="lpr_course course-grid-1">
-<div className="course-item"><div className="course-thumbnail"><a className="thumb" href="#"><img src={require("./wp-content/uploads/2015/11/course-4-450x450.jpg")} alt="Introduction Action Aid &#8211; LMS plugin" title="course-4" width="450" height="450"/></a></div><div className="thim-course-content"><h2 className="course-title"> <a href="#"> Introduction LearnPress &#8211; LMS plugin</a></h2><div className="course-meta"><div className="course-price" itemProp="offers" itemScope="" itemType="http://schema.org/Offer">
+<div className="course-item"><div className="course-thumbnail">
+    
+    
+    <a className="thumb" href="#"><img src={require("./wp-content/uploads/2015/11/course-4-450x450.jpg")} alt="Introduction Action Aid &#8211; LMS plugin" title="course-4" width="450" height="450"/></a></div><div className="thim-course-content"><h2 className="course-title"> <a href="#"> Introduction LearnPress &#8211; LMS plugin</a></h2><div className="course-meta"><div className="course-price" itemProp="offers" itemScope="" itemType="http://schema.org/Offer">
 <div className="value  free-course" itemProp="price"> Free</div><meta itemProp="priceCurrency" content="USD" /></div></div> <a className="course-readmore" href="#">Read More</a></div></div></div></div></div></div></div>
 <div id="pgc-tc-megamenu-7682-0-2" className="panel-grid-cell"><div id="panel-tc-megamenu-7682-0-2-0" className="so-panel widget widget_single-images panel-first-child panel-last-child" data-index="2"><div className="thim-widget-single-images thim-widget-single-images-base template-base"><div className="single-image text-left">
 <a target="_self" href="#"><img src={require("./wp-content/uploads/2016/02/megamenu.jpg")} width="252" height="359" alt="" /></a></div></div></div></div></div></div></div></div>
@@ -692,7 +717,9 @@ jQuery(document).ready(function ($) {
 										<div className="entry-content"><div id="lp-single-course" className="lp-single-course"><div id="learn-press-course" className="course-summary learn-press">
                              
                               
-                                            <div className="course-summary"><div className="course-thumbnail"> <img width="870" height="500" src={"/Lead.jpg"} className="attachment-full size-full wp-post-image" alt="slider" title="course-1"  sizes="(max-width: 870px) 100vw, 870px" /></div>
+                                            <div className="course-summary"><div className="course-thumbnail"> 
+                                            <img width="870" height="500" src={"/Lead.jpeg"} className="attachment-full size-full wp-post-image" alt="slider" title="course-1"  sizes="(max-width: 870px) 100vw, 870px" />
+                                            </div>
                                            
                                                                      </div>
     
@@ -705,15 +732,17 @@ jQuery(document).ready(function ($) {
                 <div className="thim-widget-course-categories thim-widget-course-categories-base template-base-v3">
                     <h4 className="widget-title">All Training</h4>
                     <ul><li> <a href="/childProtect">Child Protection Policies and procedure</a></li>
+                    <li> <a href="/pseah">Prevention of Sexual Abuse, Exploitation and Harm</a></li>
                     </ul> </div></aside> </div>
             </div></div> 
 
             </section><footer id="colophon" className=" site-footer"><div className="footer"><div className="container"><div className="row"><aside id="siteorigin-panels-builder-9" className="widget widget_siteorigin-panels-builder footer_widget">
 				<div id="pl-w57e9cc2c86af4" className="panel-layout"><div id="pg-w57e9cc2c86af4-0" className="panel-grid panel-no-style">
-                    <div id="pgc-w57e9cc2c86af4-0-4" className="panel-grid-cell"><div id="panel-w57e9cc2c86af4-0-4-0" className="so-panel widget widget_nav_menu panel-first-child panel-last-child" data-index="5"><h3 className="widget-title">Courses</h3>
+                    <div id="pgc-w57e9cc2c86af4-0-4" className="panel-grid-cell"><div id="panel-w57e9cc2c86af4-0-4-0" className="so-panel widget widget_nav_menu panel-first-child panel-last-child" data-index="5"><h3 className="widget-title">Trainings</h3>
                     <div className="menu-recommend-container">
                         <ul id="menu-recommend" className="menu">
                             <li id="menu-item-6718" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6718 tc-menu-item tc-menu-depth-0 tc-menu-layout-default"><a href="/childProtect" className="tc-menu-inner">Child Protection Policies and procedure</a></li><li id="menu-item-3429" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-3429 tc-menu-item tc-menu-depth-0 tc-menu-layout-default"><a href="#" className="tc-menu-inner"></a></li>
+                            <li id="menu-item-6718" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6718 tc-menu-item tc-menu-depth-0 tc-menu-layout-default"><a href="/Pseah" className="tc-menu-inner">Prevention of Sexual Abuse, Exploitation and Harm</a></li><li id="menu-item-3429" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-3429 tc-menu-item tc-menu-depth-0 tc-menu-layout-default"><a href="#" className="tc-menu-inner"></a></li>
                           </ul></div></div></div></div></div></aside></div></div></div>
                             <div className="copyright-area"><div className="container"><div className="copyright-content"><div className="row"><div className="col-sm-6"><p className="text-copyright">Copyright<a className="color_primary" href="#" > ActionAid</a>  @ 2019 All right reserved.</p></div><div className="col-sm-6 text-right"><aside id="nav_menu-14" className="widget widget_nav_menu"><div className="menu-privacy-container"><ul id="menu-privacy" className="menu"><li id="menu-item-1765" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-1765 tc-menu-item tc-menu-depth-0 tc-menu-layout-default"><a href="#" className="tc-menu-inner">Privacy</a></li><li id="menu-item-1766" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-1766 tc-menu-item tc-menu-depth-0 tc-menu-layout-default"><a href="#" className="tc-menu-inner">Terms</a></li></ul></div></aside></div></div></div></div></div></footer></div></div> 
                             <a href="#" id="back-to-top"> <i className="fa fa-chevron-up" aria-hidden="true"></i> </a></div>                   
@@ -829,6 +858,7 @@ jQuery(document).ready(function ($) {
           
           
           <div className="tp_chameleon_overlay"><div className="tp_chameleon_progress"><div className="tp_chameleon_heading">Processing!</div></div></div>
+                        </div>}
         </div>
   
         )
