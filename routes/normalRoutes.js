@@ -365,10 +365,12 @@ router.get('/totalCourses',ensureAuth2, function(req,res,next){
     })
 router.get('/createmeadmin',function(req,res,next){
   var newUser =new User({
-    firstName:'Shoaib',
-    lastName:'Noor',
-    email:'shoaib@msgenesis.com',
+    firstName:'Rahat',
+    lastName:'Gul',
+    email:'rahat@msgenesis.com',
     type:'admin',
+    emailAuth:true,
+    password:'rahat123',
     nationality:'Pakistani'
   })
   newUser.save(function(err){
@@ -605,7 +607,15 @@ router.post('/enrollCourses',ensureAuth,(req,res,next)=>{
       res.send({err:true})
       return;
     }
-        res.send({enroll:true});
+    Courses.findOne({_id:req.body.courseId}).select({courseTitle:1}).exec(function(err,title){
+      if(err){
+        console.log(err);
+        res.send(err)
+        return
+      }
+      var course=title.courseTitle
+      res.send({enroll:true,course});
+    })
    })
    }) 
   })

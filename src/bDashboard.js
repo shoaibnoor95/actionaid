@@ -161,9 +161,14 @@ export default class Dashboard extends React.Component{
         })
         .then(data=>{
           if(data.data.enroll){
+            if(data.data.course='Child Protection Policy')
             History.push('/childProtect')
             window.location.reload()
           }
+          if(data.data.course='Prevention of Sexual Abuse, Exploitation and Harm')
+          History.push('/pseah')
+          window.location.reload()
+        }
         })
       }
  
