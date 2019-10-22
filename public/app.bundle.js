@@ -14996,11 +14996,7 @@ var Main2 = function (_React$Component) {
                                                                                                                     )
                                                                                                                 )
                                                                                                             ),
-                                                                                                            _react2.default.createElement(
-                                                                                                                'span',
-                                                                                                                { className: 'close-popup' },
-                                                                                                                _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
-                                                                                                            ),
+                                                                                                            _react2.default.createElement('span', { className: 'close-popup' }),
                                                                                                             _react2.default.createElement(
                                                                                                                 'div',
                                                                                                                 { className: 'cssload-container' },
@@ -15134,11 +15130,7 @@ var Main2 = function (_React$Component) {
                                                                                                                 )
                                                                                                             ),
                                                                                                             ' ',
-                                                                                                            _react2.default.createElement(
-                                                                                                                'span',
-                                                                                                                { className: 'close-popup' },
-                                                                                                                _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
-                                                                                                            ),
+                                                                                                            _react2.default.createElement('span', { className: 'close-popup' }),
                                                                                                             _react2.default.createElement(
                                                                                                                 'div',
                                                                                                                 { className: 'cssload-container' },
@@ -15719,11 +15711,7 @@ var Main2 = function (_React$Component) {
                                         )
                                     )
                                 ),
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'close-popup' },
-                                    _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
-                                ),
+                                _react2.default.createElement('span', { className: 'close-popup' }),
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'cssload-container' },
@@ -15856,11 +15844,7 @@ var Main2 = function (_React$Component) {
                                     )
                                 ),
                                 ' ',
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'close-popup' },
-                                    _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
-                                ),
+                                _react2.default.createElement('span', { className: 'close-popup' }),
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'cssload-container' },
@@ -29643,11 +29627,7 @@ var Contact = function (_React$Component) {
                                                                                                                 )
                                                                                                             )
                                                                                                         ),
-                                                                                                        _react2.default.createElement(
-                                                                                                            'span',
-                                                                                                            { className: 'close-popup' },
-                                                                                                            _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
-                                                                                                        ),
+                                                                                                        _react2.default.createElement('span', { className: 'close-popup' }),
                                                                                                         _react2.default.createElement(
                                                                                                             'div',
                                                                                                             { className: 'cssload-container' },
@@ -29780,11 +29760,7 @@ var Contact = function (_React$Component) {
                                                                                                             )
                                                                                                         ),
                                                                                                         ' ',
-                                                                                                        _react2.default.createElement(
-                                                                                                            'span',
-                                                                                                            { className: 'close-popup' },
-                                                                                                            _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
-                                                                                                        ),
+                                                                                                        _react2.default.createElement('span', { className: 'close-popup' }),
                                                                                                         _react2.default.createElement(
                                                                                                             'div',
                                                                                                             { className: 'cssload-container' },
@@ -30571,11 +30547,7 @@ var Contact = function (_React$Component) {
                                     )
                                 )
                             ),
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'close-popup' },
-                                _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
-                            ),
+                            _react2.default.createElement('span', { className: 'close-popup' }),
                             _react2.default.createElement(
                                 'div',
                                 { className: 'cssload-container' },
@@ -30708,11 +30680,7 @@ var Contact = function (_React$Component) {
                                 )
                             ),
                             ' ',
-                            _react2.default.createElement(
-                                'span',
-                                { className: 'close-popup' },
-                                _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
-                            ),
+                            _react2.default.createElement('span', { className: 'close-popup' }),
                             _react2.default.createElement(
                                 'div',
                                 { className: 'cssload-container' },

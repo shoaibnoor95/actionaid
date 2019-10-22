@@ -665,7 +665,7 @@ jQuery(document).ready(function ($) {
          </div>
             
             }
-                <span className="close-popup"><i className="fa fa-times" aria-hidden="true"></i></span><div className="cssload-container">
+                <span className="close-popup"></span><div className="cssload-container">
                    <div className="cssload-loading"><i></i><i></i><i></i><i></i></div></div></div></div></div>
           
           
@@ -703,7 +703,7 @@ jQuery(document).ready(function ($) {
                         <div style={{color:'red'}}>{this.state.message2 }</div>
               <p className="submit"> <input type="submit" onChange={this.sigUpHandle.bind(this)} name="wp-submit" className="button button-primary button-large"  value="Sign up" /></p></form>
      
-              <p className="link-bottom">Are you a member? <a className="login"onClick={()=>{this.setState({showSignIn:true,showRegister:false,message:'',message2:''})}} href="#">Login now</a></p><div className="popup-message"></div></div></div> <span className="close-popup"><i className="fa fa-times" aria-hidden="true"></i></span><div className="cssload-container"><div className="cssload-loading"><i></i><i></i><i></i><i></i></div></div></div></div>
+              <p className="link-bottom">Are you a member? <a className="login"onClick={()=>{this.setState({showSignIn:true,showRegister:false,message:'',message2:''})}} href="#">Login now</a></p><div className="popup-message"></div></div></div> <span className="close-popup"></span><div className="cssload-container"><div className="cssload-loading"><i></i><i></i><i></i><i></i></div></div></div></div>
               
               </div>
            
@@ -826,7 +826,7 @@ jQuery(document).ready(function ($) {
          </div>
             
             }
-                 <span className="close-popup"><i className="fa fa-times" aria-hidden="true"></i></span><div className="cssload-container">
+                 <span className="close-popup"></span><div className="cssload-container">
                     <div className="cssload-loading"><i></i><i></i><i></i><i></i></div></div></div></div></div>
            
            
@@ -863,7 +863,7 @@ jQuery(document).ready(function ($) {
                         <div style={{color:'green'}}>{this.state.message }</div>
                         <div style={{color:'red'}}>{this.state.message2 }</div>
                    <p className="submit"> <input type="submit" onClick={this.sigUpHandle.bind(this)} name="wp-submit" className="button button-primary button-large" value="Sign up" /></p></form>
-                   <p className="link-bottom">Are you a member? <a className="login" onClick={()=>{this.setState({showRegister:false,showSignIn:true,message:'',message2:''})}} href="#">Login now</a></p><div className="popup-message"></div></div></div> <span className="close-popup"><i className="fa fa-times" aria-hidden="true"></i></span><div className="cssload-container"><div className="cssload-loading"><i></i><i></i><i></i><i></i></div></div></div></div></div>
+                   <p className="link-bottom">Are you a member? <a className="login" onClick={()=>{this.setState({showRegister:false,showSignIn:true,message:'',message2:''})}} href="#">Login now</a></p><div className="popup-message"></div></div></div> <span className="close-popup"></span><div className="cssload-container"><div className="cssload-loading"><i></i><i></i><i></i><i></i></div></div></div></div></div>
           
           
                        :<span/>}
